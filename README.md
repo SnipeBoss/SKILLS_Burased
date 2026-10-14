@@ -1,7 +1,26 @@
 # SKILLS_Burased
 
-Claude Code skills: Clean Code (Robert C. Martin), plus the third-party skills
-used in the auto-predelivery monorepo.
+Claude Code skills and agents for GS Battery. The agent team works as one company:
+see [`COMPANY.md`](COMPANY.md) for the org chart, roles and rules.
+
+## Company (agents)
+
+| Path | What it does |
+|---|---|
+| `COMPANY.md` | Org chart: CEO (human), Orchestrator, one agent per SDLC phase |
+| `agents/product-manager.md` | Phase 1 Requirements |
+| `agents/researcher.md` | Phase R Research (AI track) |
+| `agents/designer.md` | Phase 2 Design |
+| `agents/db-engineer.md` | Phase 3 Database |
+| `agents/tester.md` | Phase 4 TDD and Phase 6 Testing |
+| `agents/developer.md` | Phase 5 Write Code |
+
+## SOP (from Siam-GS-Battery/agent-skill)
+
+| Path | What it does |
+|---|---|
+| `skills/sop/` | GS Battery end-to-end SDLC SOP, web-dev and AI tracks; the rules every agent follows |
+| `docs/setup-guide/` | Thai setup guide for the agent skill |
 
 ## Clean Code (own)
 
