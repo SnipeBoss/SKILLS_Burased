@@ -21,7 +21,11 @@ You are building a GS Battery internal product across the **full software develo
 Both tracks share Phases 1–4 and 6, the Multi-Agent rules, and the DoR/DoD below. The AI track
 adds **Phase 0 (branch first)** and **Phase R (Research)**, and replaces the backend half of
 Phase 5 with Python Clean Architecture and the house Python standard. Frontend code on either
-track follows the web-dev Phase 2 and Phase 5 rules. If the track is unclear, ask the user.
+track follows the web-dev Phase 2 and Phase 5 rules.
+
+**Default track: AI.** Our company builds on the AI-track Code Architecture
+(`ref/07_AI_ENGINEERING`: uv monorepo, Clean Architecture, house Python standard). Pick
+web-dev only when the user asks for it.
 
 ### Connections used per phase
 - **Database phase → PostgreSQL:** After the schema doc is approved, the migrations are applied to the database. The backend connects using a database connection string (`DATABASE_URL`). Never commit credentials — keep them in env.
@@ -161,7 +165,12 @@ Desktop 1440px+ (full layout, 32px padding) · Tablet 768–1024px (24px padding
 ### Component & accessibility rules
 
 - Use **Tailwind utility classes** — never inline `style={{}}` (exception: dynamic values not expressible as classes).
-- Convert reusable elements to components (`Button/Primary`, `Input/Default`).
+- **UI components come from [shadcn/ui](https://ui.shadcn.com) only.** Add them with
+  `npx shadcn@latest add <name>` into `src/components/ui/`. Never invent or hand-write a UI
+  primitive (Button, Input, Dialog, Table, ...). If shadcn/ui has no fit, ask the user.
+- Feature components only **compose** shadcn/ui components; they add no new primitives.
+- **Variants are written with [CVA](https://cva.style)** (`cva()` + `VariantProps`), classes
+  merged with `cn()`. A new look is a new variant in the shadcn component's `cva`, not a copy.
 - Semantic HTML first (`<button>`/`<a>`/`<form>`); Tab-reachable + Enter/Space-activatable; visible focus rings; colour never the sole signal.
 - Export screens PNG @2x, icons/logos SVG; commit to the repo and keep a design README with the design assets link.
 - Every async surface needs **loading + empty + error** states.
@@ -273,7 +282,7 @@ Enable `strict`, `noImplicitAny`, `strictNullChecks`, `noUnusedLocals`, `noUnuse
 
 ### React best practices
 
-Functional components + hooks only (no class components). Order inside a component: Props interface → hooks → effects → handlers → early returns → JSX. Extract reusable logic into custom hooks. Use a unique `id` for `key`, not the index. Memoize (`React.memo` / `useMemo` / `useCallback`) only where it matters. Style with Tailwind utilities (use `clsx` for conditional classes); mobile-first responsive.
+Functional components + hooks only (no class components). Order inside a component: Props interface → hooks → effects → handlers → early returns → JSX. Extract reusable logic into custom hooks. Use a unique `id` for `key`, not the index. Memoize (`React.memo` / `useMemo` / `useCallback`) only where it matters. Style with Tailwind utilities; variants with `cva`, merged with `cn()` (no ad-hoc `clsx` ternaries); mobile-first responsive.
 
 ### Backend layering — MVC, logic out of controllers
 
@@ -366,6 +375,8 @@ Use **Test-Driven Development (TDD)** — write tests **before** writing functio
 - **Echo internal `err.message`** in unhandled 5xx responses, or put business logic in controllers.
 - **Interpolate strings into SQL** — parameterize. **Hardcode or commit secrets** — ever.
 - **Ignore a failing test.**
+- **Hand-write a UI component** that shadcn/ui provides, or style variants without `cva`.
+- **Open a PR that does more than one thing** (`small-prs`), or merge code that skipped Clean Code review (`clean-code-review`).
 - **Write to the same files concurrently** from multiple agents.
 - **Share or hardcode sensitive tokens/secrets** between agent sessions.
 - **Neglect container packaging** — Dockerfiles must be kept up-to-date and all services runnable via the root `docker-compose.yml` container stack.
@@ -380,3 +391,4 @@ Use **Test-Driven Development (TDD)** — write tests **before** writing functio
 6. ✅ Multi-Agent protocols followed (branch isolation, single-source task tracking, no concurrent file write conflicts).
 7. ✅ Pack code to be a container every time; working Dockerfiles and root compose stack are present and verified.
 8. ✅ AI track only: the Python Definition of Done in `ref/07_AI_ENGINEERING/AI_TRACK.md` passed — zones and DAG respected, apps isolated, layers enforced, research approach chosen and promoted, acceptance metric recorded.
+9. ✅ Every PR is small and self-contained (`small-prs`) and written and reviewed to Clean Code (`clean-code-writer`, `clean-code-review`); UI uses shadcn/ui components with `cva` variants only.

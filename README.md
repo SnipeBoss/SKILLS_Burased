@@ -7,10 +7,13 @@ see [`COMPANY.md`](COMPANY.md) for the org chart, roles and rules.
 
 | Path | What it does |
 |---|---|
-| `COMPANY.md` | Org chart: CEO (human), Orchestrator, one agent per SDLC phase |
-| `agents/product-manager.md` | Phase 1 Requirements |
+| `COMPANY.md` | Org chart, roles and company rules |
+| `agents/executive.md` | Strategy, board, KPIs, executive communication |
+| `agents/business.md` | Business cases, market research, operations, kaizen |
+| `agents/sales.md` | Account research, call prep, outreach, sales assets |
+| `agents/product-manager.md` | Phase 1 Requirements, PRD, roadmap, sprints |
 | `agents/researcher.md` | Phase R Research (AI track) |
-| `agents/designer.md` | Phase 2 Design |
+| `agents/designer.md` | Phase 2 Design (shadcn/ui components only) |
 | `agents/db-engineer.md` | Phase 3 Database |
 | `agents/tester.md` | Phase 4 TDD and Phase 6 Testing |
 | `agents/developer.md` | Phase 5 Write Code |
@@ -19,7 +22,7 @@ see [`COMPANY.md`](COMPANY.md) for the org chart, roles and rules.
 
 | Path | What it does |
 |---|---|
-| `skills/sop/` | GS Battery end-to-end SDLC SOP, web-dev and AI tracks; the rules every agent follows |
+| `skills/sop/` | GS Battery end-to-end SDLC SOP; AI track is the company default; frontend is shadcn/ui + CVA only |
 | `docs/setup-guide/` | Thai setup guide for the agent skill |
 
 ## Clean Code (own)
@@ -36,6 +39,17 @@ see [`COMPANY.md`](COMPANY.md) for the org chart, roles and rules.
 | Path | What it does |
 |---|---|
 | `skills/small-prs/` | Split work into small, self-contained PRs; summary of Google's "Small CLs" (CC-BY 3.0) |
+
+## Business division (from awesome-claude-corporate-skills, MIT)
+
+| Agent | Skills | Source folder |
+|---|---|---|
+| `executive` | `board-meeting-prep`, `change-management`, `competitive-analysis`, `deep-research`, `executive-communication`, `internal-comms`, `knowledge-synthesis`, `kpi-dashboard`, `ma-due-diligence`, `risk-assessment`, `strategic-planning`, `task-management` | `01-executive-leadership` |
+| `business` | `business-case-builder`, `file-organizer`, `incident-postmortem`, `kaizen`, `meeting-insights-analyzer`, `memory-management`, `process-optimization`, `project-status-report`, `resource-planning`, `sop-builder`, `vendor-management`, `market-research`, `unit-economics` | `07-operations`, `04-marketing`, `02-finance-accounting` |
+| `sales` | `account-research`, `account-research-common-room`, `call-prep`, `call-prep-common-room`, `competitive-intelligence`, `compose-outreach`, `contact-research`, `create-an-asset`, `daily-briefing`, `draft-outreach`, `enrich-lead`, `lead-research-assistant`, `prospect-apollo`, `prospect-common-room`, `sequence-load`, `weekly-prep-brief` | `05-sales` |
+| `product-manager` | `brainstorming`, `doc-coauthoring`, `feature-spec`, `prd-writer`, `product-launch-playbook`, `roadmap-builder`, `search-strategy`, `source-management`, `sprint-planning`, `user-research-synthesizer` | `09-product-management` |
+
+Licence: [`licenses/awesome-claude-corporate-skills.LICENSE`](licenses/awesome-claude-corporate-skills.LICENSE).
 
 ## Third-party (vendored copies, MIT)
 

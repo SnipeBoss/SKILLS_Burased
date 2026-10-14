@@ -90,7 +90,7 @@ CREATE TABLE users (
 src/
 ├── assets/              # รูปภาพ, fonts, static files
 ├── components/
-│   ├── common/          # Reusable (Button, Input, Modal)
+│   ├── ui/              # shadcn/ui เท่านั้น (npx shadcn@latest add) — ห้ามเขียน component เอง
 │   ├── layout/          # Header, Footer, Sidebar
 │   └── features/        # Feature-specific components
 │       ├── auth/
@@ -415,18 +415,34 @@ export function errorHandler(err: Error, req: Request, res: Response, next: Next
 <button style={{ padding: '8px 16px', backgroundColor: '#2563eb' }}>Save</button>
 ```
 
-**ใช้ `clsx` สำหรับ conditional classes:**
+**ใช้ component จาก [shadcn/ui](https://ui.shadcn.com) เท่านั้น** — ห้ามคิดหรือเขียน component ใหม่เอง
+
+```bash
+npx shadcn@latest add button dialog table
+```
+
+**Variant เขียนด้วย [CVA](https://cva.style)** — ต้องการหน้าตาใหม่ ให้เพิ่ม variant ใน `cva` ของ component นั้น:
 
 ```tsx
-import clsx from 'clsx';
+// src/components/ui/button.tsx (สร้างโดย shadcn) — เพิ่ม variant "pass" ใน buttonVariants
+const buttonVariants = cva('inline-flex items-center justify-center rounded-md text-sm', {
+  variants: {
+    variant: {
+      default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+      pass: 'bg-green-600 text-white hover:bg-green-700',
+    },
+    size: { default: 'h-9 px-4', sm: 'h-8 px-3' },
+  },
+  defaultVariants: { variant: 'default', size: 'default' },
+});
 
-<button className={clsx(
-  'px-4 py-2 rounded-lg transition',
-  isPrimary && 'bg-blue-600 text-white hover:bg-blue-700',
-  isDisabled && 'opacity-50 cursor-not-allowed'
-)}>
-  Click me
-</button>
+// ใช้งาน
+<Button variant="pass" size="sm">Approve</Button>
+```
+
+```tsx
+// ❌ ห้ามสร้างปุ่มเอง หรือทำ variant ด้วย clsx ternary
+<button className={clsx('px-4 py-2', isPrimary && 'bg-blue-600')}>Click me</button>
 ```
 
 **Mobile-first Responsive:**
