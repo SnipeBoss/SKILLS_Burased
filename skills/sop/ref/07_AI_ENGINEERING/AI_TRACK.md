@@ -71,6 +71,7 @@ imports an app; nothing outside `research/` imports `research/`.
 | `AppError` + global handler | `entities/errors.DomainError` + `exception_handler` in `main.py` |
 | `{ success, data }` envelope | same envelope, every path, errors included |
 | Vitest / Supertest | `pytest` / `httpx.AsyncClient` + `testcontainers` |
+| Playwright (E2E), k6 (load) | same tools: they drive the browser and HTTP, not Python |
 | `camelCase` functions | `snake_case` functions, `PascalCase` classes (PEP 8) |
 | no `any` | type hints on every signature |
 | no `console.log` | `logging`, no stray `print()` |

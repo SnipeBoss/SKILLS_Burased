@@ -23,9 +23,10 @@ adds **Phase 0 (branch first)** and **Phase R (Research)**, and replaces the bac
 Phase 5 with Python Clean Architecture and the house Python standard. Frontend code on either
 track follows the web-dev Phase 2 and Phase 5 rules.
 
-**Default track: AI.** Our company builds on the AI-track Code Architecture
-(`ref/07_AI_ENGINEERING`: uv monorepo, Clean Architecture, house Python standard). Pick
-web-dev only when the user asks for it.
+**Always start on the AI track.** Every project begins with Phase 0 of the AI track and
+its Code Architecture (`ref/07_AI_ENGINEERING`: uv monorepo, Clean Architecture, house
+Python standard); read `AI_TRACK.md` first. The web-dev column above is kept only as the
+reference for frontend rules.
 
 ### Connections used per phase
 - **Database phase → PostgreSQL:** After the schema doc is approved, the migrations are applied to the database. The backend connects using a database connection string (`DATABASE_URL`). Never commit credentials — keep them in env.
@@ -251,7 +252,18 @@ Enable RLS on multi-tenant tables and write policies (e.g. users see only `is_ac
 
 ### Test-Driven Development (TDD) — Test Before Dev
 
-- **Write tests before functional code:** Always write failing tests first (unit/integration) for any new business logic or endpoint before implementing the logic itself. Follow the Red-Green-Refactor cycle (write failing test -> implement code -> refactor). No functional code changes are allowed before writing tests.
+- **Write tests before functional code, always, at all three levels.** Before any
+  implementation, write failing tests from the acceptance criteria and show them red:
+
+  | Level | TypeScript / React | Python | Run |
+  |---|---|---|---|
+  | Unit | Vitest + React Testing Library | `pytest` | `npx vitest --ui` (Vitest dashboard) |
+  | Integration | Vitest + Supertest | `pytest` + `httpx.AsyncClient` + `testcontainers` | `npx vitest --ui` |
+  | E2E | Playwright | Playwright | `npx playwright test --ui` |
+
+- Follow Red-Green-Refactor (failing test -> implement -> refactor). No functional code
+  changes are allowed before all three levels of tests exist for the change.
+- Every critical path also gets a **k6** load script before release (Phase 6).
 
 ---
 
@@ -337,11 +349,12 @@ Validate input with Zod · hash passwords with bcrypt · **parameterized queries
 
 | Level | Share | Tool | Target |
 |---|---|---|---|
-| Unit | 70% | Vitest (+ React Testing Library) | FE ≥ 70%, BE ≥ 80% |
-| Integration | 20% | Supertest | 100% of endpoints (≥ happy path each) |
-| E2E / UAT | 10% | manual + UAT scenarios | critical paths (login, core, payment) |
+| Unit | 70% | Vitest (+ React Testing Library), shown in the Vitest dashboard (`--ui`) | FE ≥ 70%, BE ≥ 80% |
+| Integration | 20% | Vitest + Supertest, shown in the Vitest dashboard (`--ui`) | 100% of endpoints (≥ happy path each) |
+| E2E | 10% | Playwright | every critical path (login, core, payment) |
+| UAT | — | UAT scenarios | PM / stakeholder sign-off |
 
-Performance: load / stress / spike checks, P95 < 2s on critical paths. Security: OWASP Top 10 scan, 0 critical findings.
+Load: **k6**, with `thresholds` so the run fails when P95 ≥ 2s on a critical path. Security: OWASP Top 10 scan, 0 critical findings.
 
 ### Practices
 
@@ -351,9 +364,9 @@ Use **Test-Driven Development (TDD)** — write tests **before** writing functio
 
 **Gate 1 — sandbox checks (sandbox-enforced):** lint + type-check 0 errors · all unit tests pass · new-code coverage ≥ 70% · no `console.log` / debug code. If Gate 1 fails → do not request review.
 
-**Gate 2 — before release:** all integration tests pass · performance P95 < 2s (senior verifies) · security scan 0 critical (senior verifies) · UAT sign-off by PM / stakeholder. If Gate 2 fails → do not merge or release.
+**Gate 2 — before release:** all integration tests pass · all Playwright E2E tests pass · k6 load test P95 < 2s (senior verifies) · security scan 0 critical (senior verifies) · UAT sign-off by PM / stakeholder. If Gate 2 fails → do not merge or release.
 
-> Deep reference: `ref/06_TESTING/` — 6.2 Unit (Vitest + RTL setup and examples), 6.3 Integration (Supertest), 6.4 Performance (load test scripts), 6.5 Security (security scan), and `UAT_Scenario_Template.md` for sign-off scenarios.
+> Deep reference: `ref/06_TESTING/` — 6.2 Unit (Vitest + RTL setup and examples), 6.3 Integration (Supertest), 6.4 Performance (k6 load test scripts), 6.5 Security (security scan), and `UAT_Scenario_Template.md` for sign-off scenarios.
 
 ---
 
@@ -366,7 +379,8 @@ Use **Test-Driven Development (TDD)** — write tests **before** writing functio
 - Use Test-Driven Development (TDD) by writing failing tests before writing functional code; meet coverage targets; keep all tests green.
 - Follow Multi-Agent isolation rules; ensure subagents work on feature-specific branches and coordinate via planning and task list markdown files.
 - Pack code to be a container every time: maintain up-to-date Dockerfiles for both services and configure docker-compose to bundle all changes.
-- Pick the track at Step 0; on the AI track, read `ref/07_AI_ENGINEERING/AI_TRACK.md` before writing any Python, and branch off `main` before every new experiment, app, or package.
+- Start every project on the AI track: read `ref/07_AI_ENGINEERING/AI_TRACK.md` before writing any code, and branch off `main` before every new experiment, app, or package.
+- Do TDD every time, at unit, integration and E2E level (Vitest dashboard / `pytest`, Playwright), and load-test critical paths with k6.
 
 ## DO NOT
 
@@ -390,5 +404,7 @@ Use **Test-Driven Development (TDD)** — write tests **before** writing functio
 5. ✅ Testing Gate 1 (sandbox checks) and Gate 2 (pre-release) both passed; coverage targets met.
 6. ✅ Multi-Agent protocols followed (branch isolation, single-source task tracking, no concurrent file write conflicts).
 7. ✅ Pack code to be a container every time; working Dockerfiles and root compose stack are present and verified.
-8. ✅ AI track only: the Python Definition of Done in `ref/07_AI_ENGINEERING/AI_TRACK.md` passed — zones and DAG respected, apps isolated, layers enforced, research approach chosen and promoted, acceptance metric recorded.
+8. ✅ AI track: the Python Definition of Done in `ref/07_AI_ENGINEERING/AI_TRACK.md` passed — zones and DAG respected, apps isolated, layers enforced, research approach chosen and promoted, acceptance metric recorded.
 9. ✅ Every PR is small and self-contained (`small-prs`) and written and reviewed to Clean Code (`clean-code-writer`, `clean-code-review`); UI uses shadcn/ui components with `cva` variants only.
+10. ✅ TDD at unit, integration and E2E level (Vitest / `pytest`, Playwright); k6 load test passes its thresholds.
+

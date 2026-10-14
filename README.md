@@ -22,7 +22,7 @@ see [`COMPANY.md`](COMPANY.md) for the org chart, roles and rules.
 
 | Path | What it does |
 |---|---|
-| `skills/sop/` | GS Battery end-to-end SDLC SOP; AI track is the company default; frontend is shadcn/ui + CVA only |
+| `skills/sop/` | GS Battery end-to-end SDLC SOP; every project starts on the AI track; TDD with Vitest, Playwright, k6; frontend is shadcn/ui + CVA only |
 | `docs/setup-guide/` | Thai setup guide for the agent skill |
 
 ## Clean Code (own)

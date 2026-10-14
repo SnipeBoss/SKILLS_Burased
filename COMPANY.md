@@ -27,7 +27,7 @@ CEO (human: Burased)                     approves every phase gate, merge, push 
 
 | Agent | Owns | Skills |
 |---|---|---|
-| Orchestrator | Track choice (default AI), task split, handover, gate status | `sop`, `small-prs`, `request-refactor-plan` |
+| Orchestrator | AI track setup (Phase 0), task split, handover, gate status | `sop`, `small-prs`, `request-refactor-plan` |
 | `executive` | Strategy, competitive analysis, KPIs, board prep, change management | `01-executive-leadership` skills, `mckinsey-slides` |
 | `business` | Business cases, ROI, market research, unit economics, process improvement | `07-operations` skills, `market-research`, `unit-economics`, `mckinsey-slides` |
 | `sales` | Account and contact research, call prep, outreach drafts, sales assets | `05-sales` skills, `mckinsey-slides` |
@@ -45,14 +45,17 @@ Business-division skills come from
 ## Company rules
 
 1. **The CEO decides.** Agents propose; only the human approves a gate, merge, push or send.
-2. **AI-track architecture by default.** uv monorepo, Clean Architecture, house Python standard.
-3. **Every developer writes Clean Code and Small PRs.** Anyone who writes code uses
+2. **Every project starts on the AI track.** uv monorepo, Clean Architecture, house Python
+   standard (`sop` `ref/07_AI_ENGINEERING`).
+3. **TDD every time, at three levels.** Failing tests first: unit and integration in Vitest
+   (dashboard: `vitest --ui`) or `pytest`, E2E in Playwright; load test with k6.
+4. **Every developer writes Clean Code and Small PRs.** Anyone who writes code uses
    `clean-code-writer` and `small-prs`; every PR passes `clean-code-review` before merge.
-4. **Frontend uses shadcn/ui only.** Components come from [shadcn/ui](https://ui.shadcn.com)
+5. **Frontend uses shadcn/ui only.** Components come from [shadcn/ui](https://ui.shadcn.com)
    (`npx shadcn@latest add`); never invent or hand-write one. Variants use [CVA](https://cva.style).
-5. **Stay in your lane.** An agent only produces its own role's artefacts.
-6. **One branch per task.** Never commit to `main`, and never let two agents write the same file.
-7. **Handover in writing.** Each task names its scope, input files, gate status and branch.
-8. **Every deck is McKinsey style.** Storyline and ghost deck first, then the `mckinsey-slides`
+6. **Stay in your lane.** An agent only produces its own role's artefacts.
+7. **One branch per task.** Never commit to `main`, and never let two agents write the same file.
+8. **Handover in writing.** Each task names its scope, input files, gate status and branch.
+9. **Every deck is McKinsey style.** Storyline and ghost deck first, then the `mckinsey-slides`
    design system exactly.
-9. **No secrets in git, no invented facts.** Credentials stay in env; unverified numbers are marked.
+10. **No secrets in git, no invented facts.** Credentials stay in env; unverified numbers are marked.
