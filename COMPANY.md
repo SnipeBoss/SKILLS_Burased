@@ -28,10 +28,10 @@ CEO (human: Burased)                     approves every phase gate, merge, push 
 | Agent | Owns | Skills |
 |---|---|---|
 | Orchestrator | Track choice (default AI), task split, handover, gate status | `sop`, `small-prs`, `request-refactor-plan` |
-| `executive` | Strategy, competitive analysis, KPIs, board prep, change management | `01-executive-leadership` skills |
-| `business` | Business cases, ROI, market research, unit economics, process improvement | `07-operations` skills, `market-research`, `unit-economics` |
-| `sales` | Account and contact research, call prep, outreach drafts, sales assets | `05-sales` skills |
-| `product-manager` | MoSCoW, user stories, AC, DoR, PRD, roadmap, sprint plan | `sop`, `09-product-management` skills |
+| `executive` | Strategy, competitive analysis, KPIs, board prep, change management | `01-executive-leadership` skills, `mckinsey-slides` |
+| `business` | Business cases, ROI, market research, unit economics, process improvement | `07-operations` skills, `market-research`, `unit-economics`, `mckinsey-slides` |
+| `sales` | Account and contact research, call prep, outreach drafts, sales assets | `05-sales` skills, `mckinsey-slides` |
+| `product-manager` | MoSCoW, user stories, AC, DoR, PRD, roadmap, sprint plan | `sop`, `09-product-management` skills, `mckinsey-slides` |
 | `researcher` | Experiments, approach choice, acceptance metric | `sop`, `clean-code-writer`, `small-prs` |
 | `designer` | UI from shadcn/ui components, API shape from AC | `sop`, `design-an-interface` |
 | `db-engineer` | ERD, schema doc, migrations | `sop`, `clean-code-writer`, `small-prs` |
@@ -53,4 +53,6 @@ Business-division skills come from
 5. **Stay in your lane.** An agent only produces its own role's artefacts.
 6. **One branch per task.** Never commit to `main`, and never let two agents write the same file.
 7. **Handover in writing.** Each task names its scope, input files, gate status and branch.
-8. **No secrets in git, no invented facts.** Credentials stay in env; unverified numbers are marked.
+8. **Every deck is McKinsey style.** Storyline and ghost deck first, then the `mckinsey-slides`
+   design system exactly.
+9. **No secrets in git, no invented facts.** Credentials stay in env; unverified numbers are marked.

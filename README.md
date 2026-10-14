@@ -40,6 +40,12 @@ see [`COMPANY.md`](COMPANY.md) for the org chart, roles and rules.
 |---|---|
 | `skills/small-prs/` | Split work into small, self-contained PRs; summary of Google's "Small CLs" (CC-BY 3.0) |
 
+## Slides (own)
+
+| Path | What it does |
+|---|---|
+| `skills/mckinsey-slides/` | McKinsey/BCG decks: SCQ, Pyramid, action titles, ghost deck, then one fixed design system |
+
 ## Business division (from awesome-claude-corporate-skills, MIT)
 
 | Agent | Skills | Source folder |
